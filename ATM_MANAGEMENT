@@ -1,0 +1,58 @@
+class Atm(object):
+    def __init__(self):
+        self.amount=100000
+        self.result=[]
+        print("In parent")
+    def display1(self):
+        print("Remaining Amount in the Atm is:",self.amount)
+        print("Last Transactions-",self.result)
+class Account(Atm):
+    def __init__(self):
+        super().__init__()
+    def display(self):
+        self.bal=10000
+        print("\n1.CASH WITHDRAWAL\n2.CASH DEPOSIT\n3.Exit ")
+        f=int(input())
+        if f==1:
+            print("Enter the Amount:")
+            s1=int(input())
+            self.amount=self.amount-s1
+            self.bal=self.bal-s1
+            print("PLease take your Money.")
+            print("Your Remaining Balance:",self.bal)
+        if f==2:
+          	print("Enter the Amount:")
+          	s1=int(input())
+          	self.bal=self.bal+s1
+          	self.amount=self.amount+s1
+          	print("Your Remaining Balance:",self.bal)
+        if f==3:
+            print("Thank your Visiting.")
+    def displayStart(self):
+        n=1
+        if n!=5:
+            a="""************Welcome to atm************\n1.Please Insert Your Card\n2.Login With Phone Number\n"""
+            print(a)
+            s=int(input())
+            if s==2:
+                l=input("Enter the Phone Number:")
+                self.result.append(l)
+                res=input("Enter the OTP:")
+                if res==l[-4:]:
+                    return True
+                else:
+                    return False
+            if s==1:
+                print("Enter the Account Number:")
+                l=list(map(str,input().split()))[:10]
+                self.result.append(l)
+                return True
+A=Account()
+while(input("Next Transaction(yes/no)-")=="yes"):
+    r=A.displayStart()
+    if r:
+        A.display()
+    else:
+        print(r)
+        print("Invalid Otp")
+A.display1()
